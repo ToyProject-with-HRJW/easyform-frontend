@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAuthToken } from "../src/commons/api/hooks/login/useAuthToken";
 
 export default function Home() {
-  const [, setAccessToken] = useState("");
+  const [, setAccessToken] = useState({ email: "", name: "" });
+
+  const { mutate } = useAuthToken();
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -17,13 +20,14 @@ export default function Home() {
             splitToken,
           {
             headers: {
-              authorization: `token ${splitToken}`,
+              authorization: `${splitToken}`,
               accept: "application/json",
             },
           }
         )
         .then((data: any) => {
-          setAccessToken(data);
+          setAccessToken({ email: data.data.email, name: data.data.id });
+          mutate({ type: "GOOGLE", token: data.config.headers.authorization });
           console.log(data);
         })
         .catch((err) => console.log(err));
