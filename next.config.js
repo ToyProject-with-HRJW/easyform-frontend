@@ -2,8 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-<<<<<<< Updated upstream
-=======
 
   env: {
     BASE_URL: process.env.BASE_URL,
@@ -17,7 +15,6 @@ const nextConfig = {
       },
     ];
   },
->>>>>>> Stashed changes
 };
 
 module.exports = nextConfig;
