@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthToken } from "../src/commons/api/hooks/login/useAuthToken";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -10,41 +10,61 @@ declare global {
 }
 
 export default function Home() {
-  const [, setAccessToken] = useState({ email: "", name: "" });
+  interface IUser {
+    access_token: string;
+  }
+
+  interface IProfile {
+    email: string;
+    name: string;
+    picture: string;
+  }
+
+  const [user, setUser] = useState<IUser>({ access_token: "" });
+  const [profile, setProfile] = useState<IProfile>({
+    email: "",
+    name: "",
+    picture: "",
+  });
 
   const { mutate } = useAuthToken();
 
   // NOTE Google
   useEffect(() => {
-    const url = new URL(window.location.href);
-    const googleHash = url.hash;
-
-    if (googleHash) {
-      const splitToken = googleHash.split("=")[1].split("&")[0];
-
+    if (user.access_token !== "") {
       axios
         .get(
-          "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" +
-            splitToken,
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
           {
             headers: {
-              authorization: splitToken,
-              accept: "application/json",
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
             },
           }
         )
-        .then((data: any) => {
-          setAccessToken({ email: data.data.email, name: data.data.id });
-          mutate({ type: "GOOGLE", token: splitToken });
-          console.log(data);
+        .then((res) => {
+          setProfile(res.data);
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [user]);
+
+  const GoogleLogin = useGoogleLogin({
+    onSuccess: async (res: any) => {
+      setUser(res);
+      mutate({ type: "GOOGLE", token: res.access_token });
+    },
+    onError: (err) => console.log(err),
+  });
+
+  const GoogleLogOut = () => {
+    googleLogout();
+    setProfile({ email: "", name: "", picture: "" });
+  };
 
   // NOTE Naver
   useEffect(() => {
-    const naverLogin = new window.naver.LoginWithNaverId({
+    const NaverLogin = new window.naver.LoginWithNaverId({
       clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
       callbackUrl: "http://localhost:3000",
       loginButton: {
@@ -53,13 +73,17 @@ export default function Home() {
         height: "30",
       },
     });
-    naverLogin.init();
+    NaverLogin.init();
 
     try {
-      naverLogin.getLoginStatus((data: any) => {
+      NaverLogin.getLoginStatus((data: any) => {
         if (data) {
-          console.log("token", naverLogin.accessToken.accessToken);
-          setAccessToken({ email: data.email, name: data.name });
+          console.log("token", NaverLogin.accessToken.accessToken);
+          setProfile({
+            email: data.email,
+            name: data.name,
+            picture: data.picture,
+          });
         }
       });
     } catch (err) {
@@ -67,15 +91,10 @@ export default function Home() {
     }
   }, []);
 
-  const onClickGoogle = () => {
-    const oAuthURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=http://localhost:3000&response_type=token&scope=https://www.googleapis.com/auth/userinfo.email`;
-
-    window.location.assign(oAuthURL);
-  };
-
   return (
     <>
-      <button onClick={onClickGoogle}>구글 로그인</button>
+      <button onClick={() => GoogleLogin()}>구글로그인</button>
+      <button onClick={GoogleLogOut}>구글 로그아웃</button>
       <button id="naverIdLogin" />
     </>
   );

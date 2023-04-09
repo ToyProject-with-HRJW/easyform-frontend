@@ -4,9 +4,12 @@ import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { globalStyles } from "../src/commons/styles/globalStyles";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
+
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string;
 
   return (
     <>
@@ -17,12 +20,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           type="text/javascript"
         ></script>
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          <Global styles={globalStyles} />
-          <Component {...pageProps} />
-        </RecoilRoot>
-      </QueryClientProvider>
+      <GoogleOAuthProvider clientId={clientId}>
+        <QueryClientProvider client={queryClient}>
+          <RecoilRoot>
+            <Global styles={globalStyles} />
+            <Component {...pageProps} />
+          </RecoilRoot>
+        </QueryClientProvider>
+      </GoogleOAuthProvider>
     </>
   );
 }
