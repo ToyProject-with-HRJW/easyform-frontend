@@ -26,6 +26,7 @@ const black = {
   800: "#eeeeee",
   900: "#f5f5f5",
   950: "#fafafa",
+  1000: "#ffffff",
 };
 
 export const colors = {
