@@ -1,5 +1,7 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { breakPoints, colors, fontSize } from "commons/styles/palette";
+import { setMobileStyle, setTabletStyle } from "commons/styles/mediaQuery";
+import { colors, fontSize } from "commons/styles/palette";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,14 +13,14 @@ export const Wrapper = styled.div`
   padding: 0 12.5vw;
   border-bottom: 1px solid ${colors.black[800]};
 
-  @media screen and (max-width: ${breakPoints.tablet}px) {
+  ${setTabletStyle(css`
     padding: 0 1.668vw;
     height: 64px;
-  }
+  `)}
 
-  @media screen and (max-width: ${breakPoints.mobile}px) {
+  ${setMobileStyle(css`
     display: none;
-  }
+  `)}
 `;
 
 export const SearchWrapper = styled.div`
