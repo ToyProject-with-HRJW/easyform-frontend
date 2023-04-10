@@ -1,4 +1,6 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { setMobileStyle } from "commons/styles/mediaQuery";
 import { breakPoints, colors } from "commons/styles/palette";
 
 export default function MBSearchButton() {
@@ -14,7 +16,7 @@ export default function MBSearchButton() {
 const WriteButton = styled.div`
   display: none;
 
-  @media screen and (max-width: ${breakPoints.mobile}px) {
+  ${setMobileStyle(css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +30,7 @@ const WriteButton = styled.div`
     box-shadow: 4px 4px 12px rgba(54, 53, 81 0.25);
     border-radius: 16px;
     cursor: pointer;
-  }
+  `)}
 `;
 
 const WriteIcon = styled.div`

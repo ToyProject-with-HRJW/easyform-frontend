@@ -1,5 +1,7 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { breakPoints, colors } from "commons/styles/palette";
+import { setMobileStyle, setTabletStyle } from "commons/styles/mediaQuery";
+import { colors } from "commons/styles/palette";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,13 +13,13 @@ export const Wrapper = styled.div`
   padding: 0 13.75vw;
   background-color: #f7f9fb;
 
-  @media screen and (max-width: ${breakPoints.tablet}px) {
+  ${setTabletStyle(css`
     padding: 0 1.668vw;
-  }
+  `)}
 
-  @media screen and (max-width: ${breakPoints.mobile}px) {
+  ${setMobileStyle(css`
     padding: 0 2.086vw;
-  }
+  `)}
 `;
 
 export const LogoContainer = styled.div`
@@ -39,9 +41,9 @@ export const PCTBRightContainer = styled.div`
   width: 100px;
   height: 100%;
 
-  @media screen and (max-width: ${breakPoints.mobile}px) {
+  ${setMobileStyle(css`
     display: none;
-  }
+  `)}
 `;
 
 export const AlertSearchIcon = styled.div`
@@ -82,16 +84,14 @@ export const ProfileButtonIcon = styled.img`
 export const MBRightContainer = styled.div`
   display: none;
 
-  @media screen and (max-width: ${breakPoints.mobile}px) {
-    visibility: visible;
-    opacity: 1;
+  ${setMobileStyle(css`
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     width: 51px;
     height: 100%;
-  }
+  `)}
 `;
 
 export const HamburgerIcon = styled.div`
