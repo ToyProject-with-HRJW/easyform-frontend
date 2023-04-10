@@ -55,5 +55,6 @@ time, mark, audio, video {
     width: 100%;
     height: 100%;
     min-width: 360px;
+    font-family: "PretendardRegular";
   }
 `;
