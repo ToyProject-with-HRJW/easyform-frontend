@@ -54,6 +54,8 @@ time, mark, audio, video {
   body {
     margin: 0;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 62.5%;
+    width: 100%;
+    min-width: 360px;
   }
 `;
