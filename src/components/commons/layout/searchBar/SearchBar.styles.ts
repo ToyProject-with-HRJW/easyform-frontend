@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
   width: 100%;
   height: 88px;
-  padding: 0 12.5vw;
+  padding: 0 1.25vw;
   border-bottom: 1px solid ${colors.black[800]};
 
   ${setTabletStyle(css`
