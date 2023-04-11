@@ -114,6 +114,7 @@ export const HamburgerIconImage = styled.img`
 export const ProfileModal = styled.div<{ isDisplay: boolean }>`
   display: ${(props) => (props.isDisplay ? "flex" : "none")};
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
   position: fixed;
   right: 14.5vw;
@@ -121,6 +122,7 @@ export const ProfileModal = styled.div<{ isDisplay: boolean }>`
 
   width: 322px;
   height: 141px;
+  padding: 16px 0;
   background-color: ${colors.black[1000]};
   border: 1px solid rgba(16, 40, 72, 0.09);
   box-shadow: 0px 2px 2px -1px rgba(27, 35, 44, 0.04),
@@ -145,18 +147,16 @@ export const ModalTitle = styled.div`
   font-family: "Inter";
 
   width: 100%;
-  height: 20px;
-  padding: 16px;
-  margin-bottom: 14px;
+  height: 36px;
+  padding-left: 16px;
 `;
 
 export const EmailWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 20px;
+  height: 36px;
   padding-left: 19px;
-  margin-bottom: 17px;
 `;
 
 export const ModalIcon = styled.div`
@@ -182,7 +182,7 @@ export const BorderLine = styled.div`
   width: 100%;
   height: 1px;
   background-color: #e9ecef;
-  margin-bottom: 17px;
+  margin: 8px 0;
 `;
 
 export const LogoutWrapper = styled.div`
@@ -190,7 +190,7 @@ export const LogoutWrapper = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 20px;
+  height: 36px;
   padding-left: 20px;
   cursor: pointer;
 `;
