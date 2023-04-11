@@ -11,11 +11,7 @@ export default function Header() {
     router.push("/");
   };
 
-  const onClickProfileButton = () => {
-    if (!isDisplay) setIsDisplay(true);
-    else if (isDisplay) setIsDisplay(false);
-  };
-
+setIsDisplay(!isDisplay)
   return (
     <S.Wrapper>
       <S.LogoContainer onClick={onClickLogo}>
