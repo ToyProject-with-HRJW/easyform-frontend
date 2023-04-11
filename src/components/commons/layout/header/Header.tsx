@@ -1,8 +1,15 @@
 import * as S from "components/commons/layout/header/Header.styles";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Header() {
   const [isDisplay, setIsDisplay] = useState(false);
+
+  const router = useRouter();
+
+  const onClickLogo = () => {
+    router.push("/");
+  };
 
   const onClickProfileButton = () => {
     if (!isDisplay) setIsDisplay(true);
@@ -11,7 +18,7 @@ export default function Header() {
 
   return (
     <S.Wrapper>
-      <S.LogoContainer>
+      <S.LogoContainer onClick={onClickLogo}>
         <S.LogoImage src="assets/header/logo.png" />
       </S.LogoContainer>
 
