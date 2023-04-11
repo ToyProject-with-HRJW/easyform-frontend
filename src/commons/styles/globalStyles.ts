@@ -19,7 +19,6 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
   box-sizing: border-box;
-	font-size: 62.5%;
 	font: inherit;
 	vertical-align: baseline;
 }
@@ -55,6 +54,9 @@ time, mark, audio, video {
     width: 100%;
     height: 100%;
     min-width: 360px;
+  }
+  html {
+    font-size: 62.5%;
     font-family: "PretendardRegular";
   }
 `;
