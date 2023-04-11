@@ -72,14 +72,18 @@ export const ProfileImage = styled.div`
   background-color: #aed0ce;
   border: 1px solid ${colors.black[400]};
   border-radius: 50%;
-  margin-right: 14px;
+  margin-right: 10px;
 `;
 
-export const ProfileButtonIcon = styled.div`
-  width: 10px;
-  height: 7px;
-  background-image: url("/assets/header/icon_profile.png");
+export const ProfileButtonIcon = styled.div<{ isDisplay: boolean }>`
+  width: 14px;
+  height: 14px;
+  background-image: ${(props) =>
+    props.isDisplay
+      ? `url('/assets/header/icon_profile_up.png')`
+      : `url("/assets/header/icon_profile_down.png")`};
   background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
 `;
 
@@ -110,7 +114,6 @@ export const HamburgerIconImage = styled.img`
 export const ProfileModal = styled.div<{ isDisplay: boolean }>`
   display: ${(props) => (props.isDisplay ? "flex" : "none")};
   flex-direction: column;
-  /* justify-content: space-around; */
   align-items: flex-start;
   position: fixed;
   right: 14.5vw;

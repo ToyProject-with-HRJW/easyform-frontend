@@ -28,7 +28,10 @@ export default function Header() {
         </S.AlertSearchIcon>
         <S.ProfileContainer>
           <S.ProfileImage />
-          <S.ProfileButtonIcon onClick={onClickProfileButton} />
+          <S.ProfileButtonIcon
+            onClick={onClickProfileButton}
+            isDisplay={isDisplay}
+          ></S.ProfileButtonIcon>
         </S.ProfileContainer>
       </S.PCTBRightContainer>
 
