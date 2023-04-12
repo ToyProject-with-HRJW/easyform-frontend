@@ -56,7 +56,6 @@ export const SearchInput = styled.input`
   width: 100%;
   height: 37px;
   padding-left: 40px;
-  font-family: "Inter";
   font-size: ${fontSize.deskTopFont.subTitle};
   font-weight: 450px;
   line-height: 24px;
