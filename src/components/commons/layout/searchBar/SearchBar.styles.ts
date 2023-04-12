@@ -48,7 +48,6 @@ export const SearchIconImage = styled.img`
 export const SearchInput = styled.input`
   width: 264px;
   height: 24px;
-  font-family: "Inter";
   font-size: ${fontSize.deskTopFont.subTitle};
   font-weight: 450px;
   line-height: 24px;

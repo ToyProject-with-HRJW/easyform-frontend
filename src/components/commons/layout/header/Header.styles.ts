@@ -144,7 +144,6 @@ export const ModalTitle = styled.div`
   line-height: 20px;
   letter-spacing: 0.2px;
   color: #7e8b99;
-  font-family: "Inter";
 
   width: 100%;
   height: 36px;
@@ -175,7 +174,6 @@ export const EmailInfo = styled.div`
   line-height: 24px;
   letter-spacing: 0.2px;
   color: #272235;
-  font-family: "Inter";
 `;
 
 export const BorderLine = styled.div`
@@ -201,5 +199,4 @@ export const Logout = styled.div`
   font-size: ${fontSize.deskTopFont.subTitle};
   line-height: 24px;
   letter-spacing: 0.2px;
-  font-family: "Inter";
 `;
