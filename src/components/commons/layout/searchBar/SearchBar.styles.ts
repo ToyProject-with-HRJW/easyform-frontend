@@ -27,16 +27,21 @@ export const SearchWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   width: 320px;
+  height: 40px;
   padding: 8px 16px 8px 12px;
   border: 1px solid ${colors.black[600]};
   border-radius: 6px;
 `;
 
 export const SearchIcon = styled.div`
+  position: absolute;
+  left: 14.5px;
   width: 15px;
   height: 15px;
+  z-index: 2;
 `;
 
 export const SearchIconImage = styled.img`
@@ -46,17 +51,21 @@ export const SearchIconImage = styled.img`
 `;
 
 export const SearchInput = styled.input`
-  width: 264px;
-  height: 24px;
-  font-family: "Inter";
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: 37px;
+  padding-left: 40px;
   font-size: ${fontSize.deskTopFont.subTitle};
   font-weight: 450px;
   line-height: 24px;
   letter-spacing: 0.2px;
+  color: ${colors.black[200]};
   border: none;
+  border-radius: 6px;
 
   :focus {
-    outline: ${colors.black[1000]};
+    outline: 1px solid ${colors.blue[100]};
   }
 
   ::-webkit-input-placeholder {
@@ -65,10 +74,12 @@ export const SearchInput = styled.input`
 
   ::-webkit-search-cancel-button {
     -webkit-appearance: none;
-    /* width: 입력값;
-    height: 입력값;
-    background: url(경로) center center no-repeat; */
-    /* cursor: pointer; */
+    width: 20px;
+    height: 20px;
+    background: url("/assets/icon_search_cancel.png") center center no-repeat;
+    position: relative;
+    right: 8px;
+    cursor: pointer;
   }
 `;
 
