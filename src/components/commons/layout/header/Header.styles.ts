@@ -123,11 +123,10 @@ export const ProfileModal = styled.div<{ isDisplay: boolean }>`
   width: 322px;
   height: 141px;
   padding: 16px 0;
-  background-color: ${colors.black[1000]};
+  background-color: ${colors.black[950]};
   border: 1px solid rgba(16, 40, 72, 0.09);
-  box-shadow: 0px 2px 2px -1px rgba(27, 35, 44, 0.04),
-    0px 8px 16px -2px rgba(27, 36, 44, 0.12);
-  border-radius: 6px;
+  box-shadow: 0px 0px 8px rgba(145, 145, 145, 0.2);
+  border-radius: 4px;
 
   ${setTabletStyle(css`
     right: 2.9vw;
@@ -156,6 +155,11 @@ export const EmailWrapper = styled.div`
   width: 100%;
   height: 36px;
   padding-left: 19px;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${colors.blue[400]};
+  }
 `;
 
 export const ModalIcon = styled.div`
@@ -191,6 +195,10 @@ export const LogoutWrapper = styled.div`
   height: 36px;
   padding-left: 20px;
   cursor: pointer;
+
+  :hover {
+    background-color: ${colors.blue[400]};
+  }
 `;
 
 export const Logout = styled.div`
