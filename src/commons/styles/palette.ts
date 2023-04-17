@@ -44,9 +44,9 @@ const deskTopFont = {
 
 const mobileFont = {
   MainTitle: "1.8rem",
-  title: "1.2rem",
+  title: "1.3rem",
   subTitle: "1.2rem",
-  category: "0.8rem",
+  category: "1rem",
 };
 
 export const fontSize = {
