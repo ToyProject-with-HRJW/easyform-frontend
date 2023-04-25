@@ -10,11 +10,16 @@ export default function Header() {
   const onClickLogo = () => {
     router.push("/");
   };
-  
+
   const onClickProfileButton = () => {
-    setIsDisplay(!isDisplay)
+    setIsDisplay(!isDisplay);
   };
-  
+
+  const onClickEmail = () => {
+    router.push("/profile");
+    setIsDisplay(!isDisplay);
+  };
+
   return (
     <S.Wrapper>
       <S.LogoContainer onClick={onClickLogo}>
@@ -45,7 +50,7 @@ export default function Header() {
 
       <S.ProfileModal isDisplay={isDisplay}>
         <S.ModalTitle>Account</S.ModalTitle>
-        <S.EmailWrapper>
+        <S.EmailWrapper onClick={onClickEmail}>
           <S.ModalIcon>
             <S.ModalIconImage src="assets/header/icon_modal_email.png" />
           </S.ModalIcon>
