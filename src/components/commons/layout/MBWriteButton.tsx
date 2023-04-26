@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { setMobileStyle } from "commons/styles/mediaQuery";
 import { breakPoints, colors } from "commons/styles/palette";
 
-export default function MBSearchButton() {
+export default function MBWriteButton() {
   return (
     <WriteButton>
       <WriteIcon>
