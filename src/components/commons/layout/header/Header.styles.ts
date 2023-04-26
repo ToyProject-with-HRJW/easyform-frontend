@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { setMobileStyle, setTabletStyle } from "commons/styles/mediaQuery";
 import { colors, fontSize } from "commons/styles/palette";
 
-export const Wrapper = styled.div`
+export const PCTBWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,6 +19,22 @@ export const Wrapper = styled.div`
   `)}
 
   ${setMobileStyle(css`
+    display: none;
+  `)}
+`;
+
+export const MBWrapper = styled.div`
+  display: none;
+
+  ${setMobileStyle(css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color: #f7f9fb;
     padding: 0 2.086vw;
   `)}
 `;
@@ -97,7 +113,7 @@ export const SearchInput = styled.input`
   letter-spacing: 0.2px;
   color: ${colors.black[200]};
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
 
   :focus {
     outline: 1px solid ${colors.blue[100]};
@@ -147,7 +163,7 @@ export const ProfileContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 100%;
+  width: 70%;
   height: 100%;
 `;
 
@@ -157,7 +173,7 @@ export const ProfileImage = styled.div`
   background-color: #aed0ce;
   border: 1px solid ${colors.black[400]};
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 14px;
 `;
 
 export const ProfileButtonIcon = styled.div<{ isDisplayProfile: boolean }>`
