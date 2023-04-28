@@ -23,7 +23,7 @@ export default function Layout(props: ILayoutProps) {
     <>
       <Header />
       <SearchBarBodyWrapper>
-        {createPage ? <MenuBar></MenuBar> : <SearchBar />}
+        {createPage ? <MenuBar /> : <SearchBar />}
         {props.children}
       </SearchBarBodyWrapper>
       <MBWriteButton />
