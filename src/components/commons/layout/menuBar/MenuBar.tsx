@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 import * as S from "./MenuBar.styles";
-import Toggle from "components/commons/toggle";
+import Toggle from "components/commons/Toggle";
 
 export default function MenuBar() {
   const [selected, setSelected] = useState("question");
