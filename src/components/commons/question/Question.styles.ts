@@ -214,6 +214,7 @@ export const DeleteOptionWrapper = styled.div`
   width: 12px;
   height: 12px;
   margin-left: 26px;
+  cursor: pointer;
 `;
 
 export const DeleteOption = styled.img`
