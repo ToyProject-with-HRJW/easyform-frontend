@@ -84,7 +84,6 @@ export const AddQuestionButtonWrapper = styled.div`
   align-items: center;
 
   width: 59.583vw;
-  cursor: pointer;
 
   ${setTabletStyle(css`
     width: 100%;
@@ -107,4 +106,5 @@ export const AddQuestionButton = styled.div`
   color: ${colors.blue[100]};
   margin-top: -8px;
   margin-bottom: 16px;
+  cursor: pointer;
 `;
