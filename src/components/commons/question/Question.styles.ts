@@ -185,6 +185,43 @@ export const RadioTitle = styled.div`
   color: ${colors.black[200]};
 `;
 
+export const RadioTitleInput = styled.input`
+  width: 35.052vw;
+  height: 27px;
+  padding: 8px;
+  margin-right: 37px;
+  border: 1px solid ${colors.blue[100]};
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 19px;
+  color: ${colors.black[200]};
+
+  :focus {
+    outline: 1px solid ${colors.blue[100]};
+  }
+
+  ::-webkit-input-placeholder {
+    color: ${colors.black[200]};
+  }
+
+  ${setTabletStyle(css`
+    width: 46.769vw;
+  `)}
+`;
+
+export const DeleteOptionWrapper = styled.div`
+  width: 12px;
+  height: 12px;
+  margin-left: 26px;
+  cursor: pointer;
+`;
+
+export const DeleteOption = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 export const AddOptionButton = styled.div`
   margin-top: 12px;
   margin-left: 40px;
@@ -195,24 +232,50 @@ export const AddOptionButton = styled.div`
   cursor: pointer;
 `;
 
-export const ParagraphWrapper = styled.div`
+export const ParagraphWrapper = styled.div<{ isEditParagraph: boolean }>`
   width: 100%;
   background-color: ${colors.black[900]};
   border-radius: 4px;
+  border: ${(props) =>
+    props.isEditParagraph ? `1px solid ${colors.blue[100]}` : "none"};
 
   padding: 16px 24px;
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 21px;
   color: ${colors.black[500]};
+
+  :hover {
+    border: 1px solid ${colors.blue[100]};
+  }
 `;
 
-export const QuestionBottomWrapper = styled.div`
+export const ParagraphInput = styled.input`
+  width: 100%;
+  height: 21px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 21px;
+  color: ${colors.black[500]};
+  border: none;
+  background-color: transparent;
+
+  :focus {
+    outline: none;
+  }
+
+  ::-webkit-input-placeholder {
+    color: ${colors.black[500]};
+  }
+`;
+
+export const QuestionBottomWrapper = styled.div<{ questionType: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  width: 320px;
+  width: ${(props) =>
+    props.questionType === "Multiple Choice" ? "320px" : "190px"};
   height: 24px;
   margin-top: 32px;
 `;
