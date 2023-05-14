@@ -55,8 +55,17 @@ time, mark, audio, video {
     height: 100%;
     min-width: 360px;
   }
+
   html {
     font-size: 62.5%;
     font-family: "PretendardRegular";
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::-ms-overflow-style {
+    scrollbar-width: none;
   }
 `;
