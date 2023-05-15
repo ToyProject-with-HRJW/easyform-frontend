@@ -2,7 +2,7 @@ import { MouseEvent, useState } from "react";
 import Toggle from "../Toggle";
 import * as S from "./Question.styles";
 
-export default function Question() {
+export default function Question({ addQuestion, setAddQuestion }: any) {
   const [isEditTitle, setIsEditTitle] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [questionType, setQuestionType] = useState("Multiple Choice");
@@ -52,6 +52,10 @@ export default function Question() {
     setIsNecessaryOn(!isNecessaryOn);
   };
 
+  const onClickDeleteQuestion = (id: any) => {
+    setAddQuestion(addQuestion.filter((row: any) => row.id !== id));
+  };
+
   return (
     <S.QuestionContainer>
       <S.QuestionTopWrapper>
@@ -95,7 +99,7 @@ export default function Question() {
       {questionType === "Multiple Choice" ? (
         <S.QuestionMiddleWrapper>
           <S.SelectWrapper>
-            <S.Radio type="radio" />
+            <S.Radio type={isMultipleChoiceOn ? "checkbox" : "radio"} />
             {isEditOption ? (
               <>
                 <S.RadioTitleInput
@@ -135,7 +139,7 @@ export default function Question() {
 
       <S.QuestionBottomWrapper questionType={questionType}>
         <S.TextButton>복제</S.TextButton>
-        <S.TextButton>삭제</S.TextButton>
+        <S.TextButton onClick={onClickDeleteQuestion}>삭제</S.TextButton>
         <S.BoundaryLine />
         {questionType === "Multiple Choice" && (
           <>
