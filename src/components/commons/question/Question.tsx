@@ -95,7 +95,7 @@ export default function Question() {
       {questionType === "Multiple Choice" ? (
         <S.QuestionMiddleWrapper>
           <S.SelectWrapper>
-            <S.Radio type="radio" />
+            <S.Radio type={isMultipleChoiceOn ? "checkbox" : "radio"} />
             {isEditOption ? (
               <>
                 <S.RadioTitleInput
