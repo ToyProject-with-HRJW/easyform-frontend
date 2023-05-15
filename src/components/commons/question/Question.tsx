@@ -1,8 +1,13 @@
 import { MouseEvent, useState } from "react";
 import Toggle from "../Toggle";
 import * as S from "./Question.styles";
+import { IQuestionProps } from "./Question.types";
+import { v4 as uuidv4 } from "uuid";
 
-export default function Question({ addQuestion, setAddQuestion }: any) {
+export default function Question({
+  questionId,
+  onClickDeleteQuestion,
+}: IQuestionProps) {
   const [isEditTitle, setIsEditTitle] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [questionType, setQuestionType] = useState("Multiple Choice");
@@ -10,6 +15,7 @@ export default function Question({ addQuestion, setAddQuestion }: any) {
   const [isEditParagraph, setIsEditParagraph] = useState(false);
   const [isMultipleChoiceOn, setIsMultipleChoiceOn] = useState(false);
   const [isNecessaryOn, setIsNecessaryOn] = useState(false);
+  const [option, setOption] = useState([{ id: uuidv4() }]);
 
   const onClickEditTitle = () => {
     if (!isEditTitle) setIsEditTitle(true);
@@ -44,16 +50,24 @@ export default function Question({ addQuestion, setAddQuestion }: any) {
     setIsEditParagraph(false);
   };
 
+  const onClickAddOption = () => {
+    const newAddOption = {
+      id: uuidv4(),
+    };
+    setOption([...option, newAddOption]);
+  };
+
+  const onClickDeleteOption = (id: string) => {
+    if (option.length > 1)
+      setOption(option.filter((option: { id: string }) => option.id !== id));
+  };
+
   const onClickMultipleChoiceToggle = () => {
     setIsMultipleChoiceOn(!isMultipleChoiceOn);
   };
 
   const onClickNecessaryToggle = () => {
     setIsNecessaryOn(!isNecessaryOn);
-  };
-
-  const onClickDeleteQuestion = (id: any) => {
-    setAddQuestion(addQuestion.filter((row: any) => row.id !== id));
   };
 
   return (
@@ -98,27 +112,43 @@ export default function Question({ addQuestion, setAddQuestion }: any) {
 
       {questionType === "Multiple Choice" ? (
         <S.QuestionMiddleWrapper>
-          <S.SelectWrapper>
-            <S.Radio type={isMultipleChoiceOn ? "checkbox" : "radio"} />
-            {isEditOption ? (
-              <>
-                <S.RadioTitleInput
-                  onBlur={onBlurEditOption}
-                  autoFocus
-                  value="Option 1"
+          {option.map((el: { id: string }) => (
+            <S.SelectWrapper key={el.id}>
+              <S.RadioOptionWrapper>
+                <S.Radio
+                  type={isMultipleChoiceOn ? "checkbox" : "radio"}
+                  name="option"
                 />
-                <S.AddImageWrapper>
-                  <S.AddImage src="/assets/icon_image.png" />
-                </S.AddImageWrapper>
-                <S.DeleteOptionWrapper>
-                  <S.DeleteOption src="/assets/icon_delete_option.png" />
-                </S.DeleteOptionWrapper>
-              </>
-            ) : (
-              <S.RadioTitle onClick={onClickEditOption}>Option 1</S.RadioTitle>
-            )}
-          </S.SelectWrapper>
-          <S.AddOptionButton>옵션 추가</S.AddOptionButton>
+                {isEditOption ? (
+                  <>
+                    <S.RadioTitleInput
+                      onBlur={onBlurEditOption}
+                      autoFocus
+                      defaultValue="Option 1"
+                    />
+                    <S.AddImageWrapper>
+                      <S.AddImage src="/assets/icon_image.png" />
+                    </S.AddImageWrapper>
+                    {option.length >= 2 && (
+                      <S.DeleteOptionWrapper
+                        onClick={() => onClickDeleteOption(el.id)}
+                      >
+                        <S.DeleteOption src="/assets/icon_delete_option.png" />
+                      </S.DeleteOptionWrapper>
+                    )}
+                  </>
+                ) : (
+                  <S.RadioTitle onClick={onClickEditOption}>
+                    Option 1
+                  </S.RadioTitle>
+                )}
+              </S.RadioOptionWrapper>
+            </S.SelectWrapper>
+          ))}
+
+          <S.AddOptionButton onClick={onClickAddOption}>
+            옵션 추가
+          </S.AddOptionButton>
         </S.QuestionMiddleWrapper>
       ) : (
         <S.ParagraphWrapper
@@ -139,7 +169,9 @@ export default function Question({ addQuestion, setAddQuestion }: any) {
 
       <S.QuestionBottomWrapper questionType={questionType}>
         <S.TextButton>복제</S.TextButton>
-        <S.TextButton onClick={onClickDeleteQuestion}>삭제</S.TextButton>
+        <S.TextButton onClick={() => onClickDeleteQuestion(questionId)}>
+          삭제
+        </S.TextButton>
         <S.BoundaryLine />
         {questionType === "Multiple Choice" && (
           <>
