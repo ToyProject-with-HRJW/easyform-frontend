@@ -1,12 +1,17 @@
 import { useState } from "react";
 import * as S from "./Create.styles";
 import Question from "components/commons/question/Question";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Create() {
   const [isEditTitle, setIsEditTitle] = useState(false);
   const [isEditDescription, setIsEditDescription] = useState(false);
-  const [questionId, setQuestionId] = useState(0);
-  const [addQuestion, setAddQuestion] = useState([<Question />]);
+  const [addQuestion, setAddQuestion] = useState<any>([
+    {
+      id: uuidv4(),
+      component: <Question />,
+    },
+  ]);
 
   const onClickEditTitle = () => {
     if (!isEditTitle) setIsEditTitle(true);
@@ -25,9 +30,16 @@ export default function Create() {
   };
 
   const onClickAddQuestion = () => {
-    setAddQuestion([...addQuestion, <Question />]);
-    setQuestionId(questionId + 1);
+    const newAddQuestion = {
+      id: uuidv4(),
+      component: (
+        <Question addQuestion={addQuestion} setAddQuestion={setAddQuestion} />
+      ),
+    };
+    setAddQuestion([...addQuestion, newAddQuestion]);
   };
+
+  console.log(addQuestion);
 
   return (
     <S.Wrapper>
@@ -54,7 +66,9 @@ export default function Create() {
           />
         )}
       </S.FormDescription>
-      <S.QuestionWrapper>{addQuestion}</S.QuestionWrapper>
+      <S.QuestionWrapper>
+        {addQuestion.map((el: any) => el.component)}
+      </S.QuestionWrapper>
       <S.AddQuestionButtonWrapper>
         <S.AddQuestionButton onClick={onClickAddQuestion}>
           Add Question
