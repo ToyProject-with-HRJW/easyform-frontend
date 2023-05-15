@@ -6,10 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 export default function Create() {
   const [isEditTitle, setIsEditTitle] = useState(false);
   const [isEditDescription, setIsEditDescription] = useState(false);
-  const [addQuestion, setAddQuestion] = useState<any>([
+  const [addQuestion, setAddQuestion] = useState([
     {
       id: uuidv4(),
-      component: <Question />,
     },
   ]);
 
@@ -32,14 +31,16 @@ export default function Create() {
   const onClickAddQuestion = () => {
     const newAddQuestion = {
       id: uuidv4(),
-      component: (
-        <Question addQuestion={addQuestion} setAddQuestion={setAddQuestion} />
-      ),
     };
     setAddQuestion([...addQuestion, newAddQuestion]);
   };
 
-  console.log(addQuestion);
+  const onClickDeleteQuestion = (id: string) => {
+    if (addQuestion.length > 1)
+      setAddQuestion(
+        addQuestion.filter((question: { id: string }) => question.id !== id)
+      );
+  };
 
   return (
     <S.Wrapper>
@@ -67,7 +68,13 @@ export default function Create() {
         )}
       </S.FormDescription>
       <S.QuestionWrapper>
-        {addQuestion.map((el: any) => el.component)}
+        {addQuestion.map((el: { id: string }) => (
+          <Question
+            questionId={el.id}
+            key={el.id}
+            onClickDeleteQuestion={onClickDeleteQuestion}
+          />
+        ))}
       </S.QuestionWrapper>
       <S.AddQuestionButtonWrapper>
         <S.AddQuestionButton onClick={onClickAddQuestion}>

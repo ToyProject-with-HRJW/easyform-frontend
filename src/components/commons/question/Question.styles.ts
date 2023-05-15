@@ -166,8 +166,17 @@ export const QuestionMiddleWrapper = styled.div`
 
 export const SelectWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 22px;
+`;
+
+export const RadioOptionWrapper = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  width: 90%;
 `;
 
 export const Radio = styled.input`
@@ -223,7 +232,8 @@ export const DeleteOption = styled.img`
 `;
 
 export const AddOptionButton = styled.div`
-  margin-top: 12px;
+  width: 60px;
+  margin-top: -10px;
   margin-left: 40px;
   font-weight: 500;
   font-size: 1.6rem;
