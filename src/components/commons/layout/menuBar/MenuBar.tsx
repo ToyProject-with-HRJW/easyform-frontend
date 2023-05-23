@@ -1,13 +1,22 @@
 import { MouseEvent, useState } from "react";
 import * as S from "./MenuBar.styles";
 import Toggle from "components/commons/Toggle";
+import { useRouter } from "next/router";
 
 export default function MenuBar() {
   const [selected, setSelected] = useState("question");
   const [isOn, setIsOn] = useState(true);
 
-  const onClickCategory = (e: MouseEvent<HTMLButtonElement>) => {
+  const router = useRouter();
+
+  const onClickQuestion = (e: MouseEvent<HTMLButtonElement>) => {
     setSelected((e.target as HTMLButtonElement).value);
+    router.push("/create");
+  };
+
+  const onClickResult = (e: MouseEvent<HTMLButtonElement>) => {
+    setSelected((e.target as HTMLButtonElement).value);
+    router.push("/result");
   };
 
   const onClickToggle = () => {
@@ -20,14 +29,14 @@ export default function MenuBar() {
         <S.CategoryTitle
           className={`${selected === "question" ? "active" : ""}`}
           value="question"
-          onClick={onClickCategory}
+          onClick={onClickQuestion}
         >
           설문
         </S.CategoryTitle>
         <S.CategoryTitle
           className={`${selected === "result" ? "active" : ""}`}
           value="result"
-          onClick={onClickCategory}
+          onClick={onClickResult}
         >
           응답
         </S.CategoryTitle>

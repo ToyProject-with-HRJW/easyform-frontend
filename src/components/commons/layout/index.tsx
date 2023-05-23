@@ -13,17 +13,19 @@ interface ILayoutProps {
 }
 
 const CREATE_PAGE = "/create";
+const RESULT_PAGE = "/result";
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
 
   const createPage = router.asPath.includes(CREATE_PAGE);
+  const resultPage = router.asPath.includes(RESULT_PAGE);
 
   return (
     <>
       <Header />
       <SearchBarBodyWrapper>
-        {createPage ? <MenuBar /> : <SearchBar />}
+        {createPage || resultPage ? <MenuBar /> : <SearchBar />}
         {props.children}
       </SearchBarBodyWrapper>
       <MBWriteButton />
