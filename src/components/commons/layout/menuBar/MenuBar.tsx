@@ -1,13 +1,22 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import * as S from "./MenuBar.styles";
 import Toggle from "components/commons/Toggle";
+import { useRouter } from "next/router";
 
 export default function MenuBar() {
-  const [selected, setSelected] = useState("question");
   const [isOn, setIsOn] = useState(true);
 
-  const onClickCategory = (e: MouseEvent<HTMLButtonElement>) => {
-    setSelected((e.target as HTMLButtonElement).value);
+  const router = useRouter();
+
+  const CREATE_PAGE = router.asPath.includes("create");
+  const RESULT_PAGE = router.asPath.includes("result");
+
+  const onClickQuestion = () => {
+    router.push("/create");
+  };
+
+  const onClickResult = () => {
+    router.push("/result");
   };
 
   const onClickToggle = () => {
@@ -18,16 +27,16 @@ export default function MenuBar() {
     <S.Wrapper>
       <S.LeftContainer>
         <S.CategoryTitle
-          className={`${selected === "question" ? "active" : ""}`}
+          className={`${CREATE_PAGE ? "active" : ""}`}
           value="question"
-          onClick={onClickCategory}
+          onClick={onClickQuestion}
         >
           설문
         </S.CategoryTitle>
         <S.CategoryTitle
-          className={`${selected === "result" ? "active" : ""}`}
+          className={`${RESULT_PAGE ? "active" : ""}`}
           value="result"
-          onClick={onClickCategory}
+          onClick={onClickResult}
         >
           응답
         </S.CategoryTitle>
