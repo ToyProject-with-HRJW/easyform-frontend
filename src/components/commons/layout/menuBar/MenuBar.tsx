@@ -16,7 +16,7 @@ export default function MenuBar() {
   };
 
   const onClickResult = () => {
-    router.push("/result");
+    router.push("/result/summary");
   };
 
   const onClickToggle = () => {
