@@ -1,6 +1,6 @@
 import * as S from "./Individual.styles";
 
-export default function Individual() {
+export default function OneOption() {
   return (
     <S.IndividualContainer>
       <S.ResponseTitle>Untitled Question</S.ResponseTitle>

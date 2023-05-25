@@ -1,9 +1,11 @@
+import MultipleOption from "components/commons/response/individual/MultipleOption";
 import * as S from "./Result.styles";
-import Individual from "components/commons/response/Individual";
+import OneOption from "components/commons/response/individual/OneOption";
 import BarGraph from "components/commons/response/summary/BarGraph";
 import DoughnutGraph from "components/commons/response/summary/DoughnutGraph";
 import Paragraph from "components/commons/response/summary/Paragraph";
 import { useRouter } from "next/router";
+import IndividualParagraph from "components/commons/response/individual/IndividualParagraph";
 
 export default function Result() {
   const router = useRouter();
@@ -53,10 +55,20 @@ export default function Result() {
       )}
 
       <S.SummaryWrapper>
-        <BarGraph />
-        <DoughnutGraph />
-        <Paragraph />
-        <Individual />
+        {SUMMARY_PAGE && (
+          <>
+            <BarGraph />
+            <DoughnutGraph />
+            <Paragraph />
+          </>
+        )}
+        {INDIVIDUAL_PAGE && (
+          <>
+            <OneOption />
+            <MultipleOption />
+            <IndividualParagraph />
+          </>
+        )}
       </S.SummaryWrapper>
     </S.Wrapper>
   );
