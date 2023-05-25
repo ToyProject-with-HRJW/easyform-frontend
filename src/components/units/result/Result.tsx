@@ -1,7 +1,9 @@
 import { MouseEvent, useState } from "react";
 import * as S from "./Result.styles";
-import Summary from "components/commons/response/Summary";
 import Individual from "components/commons/response/Individual";
+import BarGraph from "components/commons/response/summary/BarGraph";
+import DoughnutGraph from "components/commons/response/summary/DoughnutGraph";
+import Paragraph from "components/commons/response/summary/Paragraph";
 
 export default function Result() {
   const [selected, setSelected] = useState("summary");
@@ -44,7 +46,9 @@ export default function Result() {
       )}
 
       <S.SummaryWrapper>
-        <Summary />
+        <BarGraph />
+        <DoughnutGraph />
+        <Paragraph />
         <Individual />
       </S.SummaryWrapper>
     </S.Wrapper>
