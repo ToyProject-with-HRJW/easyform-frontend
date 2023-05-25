@@ -49,3 +49,19 @@ export const Option = styled.div`
   line-height: 21px;
   color: ${colors.black[200]};
 `;
+
+export const Paragraph = styled.div`
+  width: 55.625vw;
+  background-color: ${colors.black[800]};
+  border-radius: 4px;
+  padding: 16px 24px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 21px;
+  color: ${colors.black[200]};
+  margin-bottom: 32px;
+
+  ${setTabletStyle(css`
+    width: 74.218vw;
+  `)}
+`;

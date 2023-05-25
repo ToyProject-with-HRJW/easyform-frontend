@@ -1,5 +1,5 @@
 import Result from "components/units/result/Result";
 
-export default function ResultPage() {
+export default function SummaryPage() {
   return <Result />;
 }

@@ -41,10 +41,42 @@ export const ChartContainer = styled.div`
   align-items: center;
 
   width: 41.51vw;
-  height: 14.167vw;
+  height: 18vw;
 
   ${setTabletStyle(css`
     width: 55.386vw;
-    height: 18.902vw;
+    height: 30vw;
   `)}
+`;
+
+export const ParagraphResponseCount = styled.div`
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 19px;
+  color: ${colors.black[300]};
+  margin-bottom: 16px;
+`;
+
+export const AnswerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 55.625vw;
+
+  ${setTabletStyle(css`
+    width: 74.218vw;
+  `)}
+`;
+
+export const Answer = styled.div`
+  width: 100%;
+  background-color: ${colors.black[800]};
+  border-radius: 4px;
+  padding: 16px 8px;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 21px;
+  color: ${colors.black[200]};
+  margin-top: 24px;
 `;

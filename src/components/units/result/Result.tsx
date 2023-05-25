@@ -1,13 +1,24 @@
-import { MouseEvent, useState } from "react";
+import MultipleOption from "components/commons/response/individual/MultipleOption";
 import * as S from "./Result.styles";
-import Summary from "components/commons/response/Summary";
-import Individual from "components/commons/response/Individual";
+import OneOption from "components/commons/response/individual/OneOption";
+import BarGraph from "components/commons/response/summary/BarGraph";
+import DoughnutGraph from "components/commons/response/summary/DoughnutGraph";
+import Paragraph from "components/commons/response/summary/Paragraph";
+import { useRouter } from "next/router";
+import IndividualParagraph from "components/commons/response/individual/IndividualParagraph";
 
 export default function Result() {
-  const [selected, setSelected] = useState("summary");
+  const router = useRouter();
 
-  const onClickCategory = (e: MouseEvent<HTMLButtonElement>) => {
-    setSelected((e.target as HTMLButtonElement).value);
+  const SUMMARY_PAGE = router.asPath.includes("summary");
+  const INDIVIDUAL_PAGE = router.asPath.includes("individual");
+
+  const onClickSummary = () => {
+    router.push("/result/summary");
+  };
+
+  const onClickIndividual = () => {
+    router.push("/result/individual");
   };
 
   return (
@@ -15,22 +26,22 @@ export default function Result() {
       <S.Title>103 Responses</S.Title>
       <S.CategoryContainer>
         <S.CategoryTab
-          className={`${selected === "summary" ? "active" : ""}`}
-          onClick={onClickCategory}
+          className={`${SUMMARY_PAGE ? "active" : ""}`}
+          onClick={onClickSummary}
           value="summary"
         >
           Summary
         </S.CategoryTab>
         <S.CategoryTab
-          className={`${selected === "individual" ? "active" : ""}`}
-          onClick={onClickCategory}
+          className={`${INDIVIDUAL_PAGE ? "active" : ""}`}
+          onClick={onClickIndividual}
           value="individual"
         >
           Individual
         </S.CategoryTab>
       </S.CategoryContainer>
 
-      {selected === "individual" && (
+      {INDIVIDUAL_PAGE && (
         <S.IndividualMenuBar>
           <S.ResponseMoveContainer>
             <S.PreviousButton>Previous</S.PreviousButton>
@@ -44,8 +55,20 @@ export default function Result() {
       )}
 
       <S.SummaryWrapper>
-        <Summary />
-        <Individual />
+        {SUMMARY_PAGE && (
+          <>
+            <BarGraph />
+            <DoughnutGraph />
+            <Paragraph />
+          </>
+        )}
+        {INDIVIDUAL_PAGE && (
+          <>
+            <OneOption />
+            <MultipleOption />
+            <IndividualParagraph />
+          </>
+        )}
       </S.SummaryWrapper>
     </S.Wrapper>
   );
