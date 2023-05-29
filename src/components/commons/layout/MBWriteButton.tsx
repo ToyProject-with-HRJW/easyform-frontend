@@ -7,7 +7,7 @@ export default function MBWriteButton() {
   return (
     <WriteButton>
       <WriteIcon>
-        <WriteIconImage src="assets/icon_write.png" />
+        <WriteIconImage src="/assets/icon_write.png" />
       </WriteIcon>
     </WriteButton>
   );
