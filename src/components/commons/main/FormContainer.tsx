@@ -3,10 +3,10 @@ import * as S from "./FormContainer.styles";
 import FormModal from "./FormModal";
 
 export default function FormContainer() {
-  const [isDisplayRecent, setIsDisplayRecent] = useState(false);
+  const [isDisplayFormModal, setIsDisplayFormModal] = useState(false);
 
   const onClickSeeMoreRecent = () => {
-    setIsDisplayRecent(!isDisplayRecent);
+    setIsDisplayFormModal(!isDisplayFormModal);
   };
 
   return (
@@ -22,7 +22,7 @@ export default function FormContainer() {
         </S.FormInfoContainer>
         <S.ButtonWrapper onClick={onClickSeeMoreRecent}>
           <S.FormSeeMoreButton />
-          <FormModal isDisplayRecent={isDisplayRecent} />
+          <FormModal isDisplayFormModal={isDisplayFormModal} />
         </S.ButtonWrapper>
       </S.FormInfoWrapper>
     </S.FormContainer>

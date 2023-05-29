@@ -2,13 +2,11 @@ import styled from "@emotion/styled";
 import { colors, fontSize } from "commons/styles/palette";
 
 interface IFormModal {
-  isDisplayRecent?: boolean;
-  isDisplayMy?: boolean;
+  isDisplayFormModal?: boolean;
 }
 
 export const FormModal = styled.div<IFormModal>`
-  display: ${(props) =>
-    props.isDisplayRecent ? "flex" : props.isDisplayMy ? "flex" : "none"};
+  display: ${(props) => (props.isDisplayFormModal ? "flex" : "none")};
   flex-direction: column;
   justify-content: space-between;
   position: absolute;

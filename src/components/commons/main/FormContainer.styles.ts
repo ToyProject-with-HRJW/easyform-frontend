@@ -159,7 +159,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const FormSeeMoreButton = styled.div`
-  width: 4px;
+  width: 13px;
   height: 23px;
   background-image: url("/assets/main/icon_seeMore.png");
   background-repeat: no-repeat;
