@@ -38,7 +38,7 @@ export default function Header() {
 
         <S.PCTBRightContainer>
           <S.AlertSearchIcon>
-            <S.AlertSearchIconImage src="assets/header/icon_alert.png" />
+            <S.AlertSearchIconImage src="/assets/header/icon_alert.png" />
           </S.AlertSearchIcon>
           <S.ProfileContainer>
             <S.ProfileImage />
@@ -53,14 +53,14 @@ export default function Header() {
           <S.ModalTitle>Account</S.ModalTitle>
           <S.EmailWrapper onClick={onClickEmail}>
             <S.ModalIcon>
-              <S.ModalIconImage src="assets/header/icon_modal_email.png" />
+              <S.ModalIconImage src="/assets/header/icon_modal_email.png" />
             </S.ModalIcon>
             <S.EmailInfo>abcdefg@gmail.com</S.EmailInfo>
           </S.EmailWrapper>
           <S.BorderLine />
           <S.LogoutWrapper>
             <S.ModalIcon>
-              <S.ModalIconImage src="assets/header/icon_modal_logout.png" />
+              <S.ModalIconImage src="/assets/header/icon_modal_logout.png" />
             </S.ModalIcon>
             <S.Logout>Log out</S.Logout>
           </S.LogoutWrapper>
@@ -89,10 +89,10 @@ export default function Header() {
         {!isDisplaySearch && (
           <S.MBRightContainer>
             <S.AlertSearchIcon onClick={onClickSearchIcon}>
-              <S.AlertSearchIconImage src="assets/header/icon_search.png" />
+              <S.AlertSearchIconImage src="/assets/header/icon_search.png" />
             </S.AlertSearchIcon>
             <S.HamburgerIcon>
-              <S.HamburgerIconImage src="assets/header/icon_hamburger.png" />
+              <S.HamburgerIconImage src="/assets/header/icon_hamburger.png" />
             </S.HamburgerIcon>
           </S.MBRightContainer>
         )}
