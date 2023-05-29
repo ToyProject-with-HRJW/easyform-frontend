@@ -7,6 +7,7 @@ import Paragraph from "components/commons/response/summary/Paragraph";
 import { useRouter } from "next/router";
 import IndividualParagraph from "components/commons/response/individual/IndividualParagraph";
 import { useState } from "react";
+import RemoveModal from "components/commons/modal/RemoveModal";
 
 export default function Result() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,15 +27,6 @@ export default function Result() {
 
   const onClickRemoveButton = () => {
     setIsModalOpen(true);
-  };
-
-  const onClickCancelRemove = () => {
-    setIsModalOpen(false);
-  };
-
-  // NOTE 추후 해당 응답 삭제 기능 함수에 추가 필요
-  const onClickConfirmRemove = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -71,24 +63,7 @@ export default function Result() {
               해당 응답 삭제
             </S.RemoveButton>
           </S.IndividualMenuBar>
-          {isModalOpen && (
-            <S.RemoveModalContainer>
-              <S.ModalTitle>응답 삭제</S.ModalTitle>
-              <S.ModalContents>
-                해당 응답지를 삭제하시겠습니까?
-                <br />
-                삭제된 응답자는 다시 확인할 수 없습니다.
-              </S.ModalContents>
-              <S.ModalButtonContainer>
-                <S.ModalCancelButton onClick={onClickCancelRemove}>
-                  취소
-                </S.ModalCancelButton>
-                <S.ModalConfirmButton onClick={onClickConfirmRemove}>
-                  확인
-                </S.ModalConfirmButton>
-              </S.ModalButtonContainer>
-            </S.RemoveModalContainer>
-          )}
+          {isModalOpen && <RemoveModal setIsModalOpen={setIsModalOpen} />}
         </>
       )}
 
