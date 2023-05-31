@@ -1,22 +1,34 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import * as S from "./FormModal.styles";
 import RemoveModal from "../modal/RemoveModal";
+import ShareModal from "../modal/ShareModal";
 
 interface IFormModalProps {
   isDisplayFormModal: boolean;
+  setIsDisplayFormModal: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function FormModal({ isDisplayFormModal }: IFormModalProps) {
+export default function FormModal({
+  isDisplayFormModal,
+  setIsDisplayFormModal,
+}: IFormModalProps) {
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
 
+  const onClickShareButton = () => {
+    setIsDisplayFormModal(false);
+    setIsShareModalOpen(true);
+  };
+
   const onClickRemoveButton = () => {
+    setIsDisplayFormModal(false);
     setIsRemoveModalOpen(true);
   };
 
   return (
     <>
       <S.FormModal isDisplayFormModal={isDisplayFormModal}>
-        <S.FormModalWrapper>
+        <S.FormModalWrapper onClick={onClickShareButton}>
           <S.ModalIcon>
             <S.ModalIconImage src="/assets/main/icon_share.png" />
           </S.ModalIcon>
@@ -35,8 +47,13 @@ export default function FormModal({ isDisplayFormModal }: IFormModalProps) {
           <S.ModalText>복제</S.ModalText>
         </S.FormModalWrapper>
       </S.FormModal>
+
       {isRemoveModalOpen && (
         <RemoveModal setIsModalOpen={setIsRemoveModalOpen} />
+      )}
+
+      {isShareModalOpen && (
+        <ShareModal setIsShareModalOpen={setIsShareModalOpen} />
       )}
     </>
   );

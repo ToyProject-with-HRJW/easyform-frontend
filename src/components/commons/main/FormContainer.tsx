@@ -20,9 +20,12 @@ export default function FormContainer() {
           <S.FormTitle>Account Approval Research</S.FormTitle>
           <S.FormEditDate>edited 3days ago</S.FormEditDate>
         </S.FormInfoContainer>
-        <S.ButtonWrapper onClick={onClickSeeMoreRecent}>
-          <S.FormSeeMoreButton />
-          <FormModal isDisplayFormModal={isDisplayFormModal} />
+        <S.ButtonWrapper>
+          <S.FormSeeMoreButton onClick={onClickSeeMoreRecent} />
+          <FormModal
+            isDisplayFormModal={isDisplayFormModal}
+            setIsDisplayFormModal={setIsDisplayFormModal}
+          />
         </S.ButtonWrapper>
       </S.FormInfoWrapper>
     </S.FormContainer>
