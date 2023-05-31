@@ -309,3 +309,16 @@ export const Logout = styled.div`
   line-height: 24px;
   letter-spacing: 0.2px;
 `;
+
+export const LoginButton = styled.button`
+  width: 132px;
+  height: 40px;
+  background-color: ${colors.blue[400]};
+  border-radius: 4px;
+  border: none;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 24px;
+  color: ${colors.blue[100]};
+  cursor: pointer;
+`;
