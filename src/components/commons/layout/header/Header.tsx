@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Header() {
+  const [isLogin, setIsLogin] = useState(false);
   const [isDisplayProfile, setIsDisplayProfile] = useState(false);
   const [isDisplaySearch, setIsDisplaySearch] = useState(false);
 
@@ -10,6 +11,10 @@ export default function Header() {
 
   const onClickLogo = () => {
     router.push("/");
+  };
+
+  const onClickLoginButton = () => {
+    router.push("/login");
   };
 
   const onClickProfileButton = () => {
@@ -36,18 +41,22 @@ export default function Header() {
           <S.LogoImage src="/assets/header/logo.png" />
         </S.LogoContainer>
 
-        <S.PCTBRightContainer>
-          <S.AlertSearchIcon>
-            <S.AlertSearchIconImage src="/assets/header/icon_alert.png" />
-          </S.AlertSearchIcon>
-          <S.ProfileContainer>
-            <S.ProfileImage />
-            <S.ProfileButtonIcon
-              onClick={onClickProfileButton}
-              isDisplayProfile={isDisplayProfile}
-            ></S.ProfileButtonIcon>
-          </S.ProfileContainer>
-        </S.PCTBRightContainer>
+        {isLogin ? (
+          <S.PCTBRightContainer>
+            <S.AlertSearchIcon>
+              <S.AlertSearchIconImage src="/assets/header/icon_alert.png" />
+            </S.AlertSearchIcon>
+            <S.ProfileContainer>
+              <S.ProfileImage />
+              <S.ProfileButtonIcon
+                onClick={onClickProfileButton}
+                isDisplayProfile={isDisplayProfile}
+              ></S.ProfileButtonIcon>
+            </S.ProfileContainer>
+          </S.PCTBRightContainer>
+        ) : (
+          <S.LoginButton onClick={onClickLoginButton}>Log In</S.LoginButton>
+        )}
 
         <S.ProfileModal isDisplayProfile={isDisplayProfile}>
           <S.ModalTitle>Account</S.ModalTitle>
@@ -69,9 +78,28 @@ export default function Header() {
 
       <S.MBWrapper>
         {!isDisplaySearch ? (
-          <S.LogoContainer onClick={onClickLogo}>
-            <S.LogoImage src="/assets/header/logo.png" />
-          </S.LogoContainer>
+          isLogin ? (
+            <>
+              <S.LogoContainer onClick={onClickLogo}>
+                <S.LogoImage src="/assets/header/logo.png" />
+              </S.LogoContainer>
+              <S.MBRightContainer>
+                <S.AlertSearchIcon onClick={onClickSearchIcon}>
+                  <S.AlertSearchIconImage src="/assets/header/icon_search.png" />
+                </S.AlertSearchIcon>
+                <S.HamburgerIcon>
+                  <S.HamburgerIconImage src="/assets/header/icon_hamburger.png" />
+                </S.HamburgerIcon>
+              </S.MBRightContainer>
+            </>
+          ) : (
+            <>
+              <S.LogoContainer onClick={onClickLogo}>
+                <S.LogoImage src="/assets/header/logo.png" />
+              </S.LogoContainer>
+              <S.LoginButton onClick={onClickLoginButton}>Log In</S.LoginButton>
+            </>
+          )
         ) : (
           <S.MBSearchContainer>
             <S.BackIconContainer onClick={onClickBackIcon}>
@@ -84,17 +112,6 @@ export default function Header() {
               <S.SearchInput type="search" placeholder="Search" />
             </S.SearchWrapper>
           </S.MBSearchContainer>
-        )}
-
-        {!isDisplaySearch && (
-          <S.MBRightContainer>
-            <S.AlertSearchIcon onClick={onClickSearchIcon}>
-              <S.AlertSearchIconImage src="/assets/header/icon_search.png" />
-            </S.AlertSearchIcon>
-            <S.HamburgerIcon>
-              <S.HamburgerIconImage src="/assets/header/icon_hamburger.png" />
-            </S.HamburgerIcon>
-          </S.MBRightContainer>
         )}
       </S.MBWrapper>
     </>
