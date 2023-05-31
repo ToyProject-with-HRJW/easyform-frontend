@@ -106,7 +106,9 @@ export default function ShareModal({ setIsShareModalOpen }: IShareModalProps) {
 
       <S.BottomContainer>
         <S.CancelButton onClick={onClickCancelButton}>취소</S.CancelButton>
-        <S.ConfirmButton onClick={onClickConfirmButton}>확인</S.ConfirmButton>
+        <S.ConfirmButton onClick={onClickConfirmButton}>
+          {tabName === "url" ? "확인" : "보내기"}
+        </S.ConfirmButton>
       </S.BottomContainer>
     </S.ModalContainer>
   );
