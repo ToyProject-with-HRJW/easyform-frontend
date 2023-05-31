@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import * as S from "./FormModal.styles";
 import RemoveModal from "../modal/RemoveModal";
 import ShareModal from "../modal/ShareModal";
+import ToastPopUp from "../ToastPopUP";
 
 interface IFormModalProps {
   isDisplayFormModal: boolean;
@@ -14,6 +15,7 @@ export default function FormModal({
 }: IFormModalProps) {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
+  const [isToastOpen, setIsToastOpen] = useState(false);
 
   const onClickShareButton = () => {
     setIsDisplayFormModal(false);
@@ -23,6 +25,11 @@ export default function FormModal({
   const onClickRemoveButton = () => {
     setIsDisplayFormModal(false);
     setIsRemoveModalOpen(true);
+  };
+
+  const onClickCopyButton = () => {
+    setIsDisplayFormModal(false);
+    setIsToastOpen(true);
   };
 
   return (
@@ -40,7 +47,7 @@ export default function FormModal({
           </S.ModalIcon>
           <S.ModalText>삭제</S.ModalText>
         </S.FormModalWrapper>
-        <S.FormModalWrapper>
+        <S.FormModalWrapper onClick={onClickCopyButton}>
           <S.ModalIcon>
             <S.ModalIconImage src="/assets/main/icon_copy.png" />
           </S.ModalIcon>
@@ -55,6 +62,12 @@ export default function FormModal({
       {isShareModalOpen && (
         <ShareModal setIsShareModalOpen={setIsShareModalOpen} />
       )}
+
+      <ToastPopUp
+        isToastOpen={isToastOpen}
+        setIsToastOpen={setIsToastOpen}
+        contents="설문지가 복제되었습니다."
+      />
     </>
   );
 }
