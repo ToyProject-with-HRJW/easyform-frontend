@@ -1,19 +1,45 @@
+import { useRouter } from "next/router";
 import * as S from "./Home.styles";
+import { useRecoilValue } from "recoil";
+import { AuthState } from "store/AuthState";
+import { useEffect } from "react";
 
 export default function Home() {
+  const authState = useRecoilValue(AuthState);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authState.isLogin) router.replace("/main");
+  }, [authState]);
+
+  const onClickCloseModal = () => {
+    router.push("/main");
+  };
+
+  const onClickMoveToCreate = () => {
+    router.push("/create");
+  };
+
   return (
     <S.Wrapper>
-      <S.InformationContainer>
-        <S.ImageContainer>
-          <S.Image src="/assets/img_home.png" />
-        </S.ImageContainer>
-        <S.Logo />
-        <S.InformationText>
-          작성된 설문지가 없습니다.
-          <br />
-          설문지를 작성해 주세요.
-        </S.InformationText>
-      </S.InformationContainer>
+      <S.ModalContainer>
+        <S.ModalCloseContainer>
+          <S.ModalCloseButton onClick={onClickCloseModal} />
+        </S.ModalCloseContainer>
+        <S.ContentsContainer>
+          <S.ContentsTitle>혼자 설문지 종합하기 힘드셨나요?</S.ContentsTitle>
+          <S.ContentsBoldTitle>
+            링크 공유 하나로 팀원들의 가입 없이
+          </S.ContentsBoldTitle>
+          <S.ContentsTitle>
+            함께 작성하고 관리하세요. <S.FireIcon />
+          </S.ContentsTitle>
+        </S.ContentsContainer>
+        <S.MoveToCreateButton onClick={onClickMoveToCreate}>
+          설문지 작성하러 가기
+        </S.MoveToCreateButton>
+      </S.ModalContainer>
     </S.Wrapper>
   );
 }
