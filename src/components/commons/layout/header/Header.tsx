@@ -1,9 +1,11 @@
 import * as S from "components/commons/layout/header/Header.styles";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { AuthState } from "store/AuthState";
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const authState = useRecoilValue(AuthState);
   const [isDisplayProfile, setIsDisplayProfile] = useState(false);
   const [isDisplaySearch, setIsDisplaySearch] = useState(false);
 
@@ -41,7 +43,7 @@ export default function Header() {
           <S.LogoImage src="/assets/header/logo.png" />
         </S.LogoContainer>
 
-        {isLogin ? (
+        {authState.isLogin ? (
           <S.PCTBRightContainer>
             <S.AlertSearchIcon>
               <S.AlertSearchIconImage src="/assets/header/icon_alert.png" />
@@ -78,7 +80,7 @@ export default function Header() {
 
       <S.MBWrapper>
         {!isDisplaySearch ? (
-          isLogin ? (
+          authState.isLogin ? (
             <>
               <S.LogoContainer onClick={onClickLogo}>
                 <S.LogoImage src="/assets/header/logo.png" />
