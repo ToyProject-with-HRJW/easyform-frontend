@@ -14,7 +14,7 @@ export default function Header() {
   };
 
   const onClickLoginButton = () => {
-    router.push("/login");
+    router.replace("/login");
   };
 
   const onClickProfileButton = () => {
