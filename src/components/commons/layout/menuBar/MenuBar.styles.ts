@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { setTabletStyle } from "commons/styles/mediaQuery";
 import { fontSize } from "commons/styles/palette";
 import { colors } from "commons/styles/palette";
+import { IAuthState } from "store/AuthState";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -78,15 +79,30 @@ export const MiddleButtonContainer = styled.div`
   width: 158px;
 `;
 
-export const TextButton = styled.div`
+export const TextButton = styled.button`
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 24px;
   color: ${colors.black[300]};
+  background-color: transparent;
+  padding: 0;
+  border: none;
   cursor: pointer;
 `;
 
-export const SaveButton = styled.div`
+export const ShareButton = styled.button<{ authState: IAuthState }>`
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 24px;
+  color: ${(props) =>
+    props.authState.isLogin ? colors.black[300] : colors.black[500]};
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  cursor: ${(props) => (props.authState.isLogin ? "pointer" : "default")};
+`;
+
+export const SaveButton = styled.div<{ authState: IAuthState }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,10 +110,44 @@ export const SaveButton = styled.div`
   width: 132px;
   height: 40px;
   border-radius: 4px;
-  background-color: ${colors.blue[100]};
+  background-color: ${(props) =>
+    props.authState.isLogin ? colors.blue[100] : colors.black[700]};
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 24px;
+  color: ${(props) =>
+    props.authState.isLogin ? colors.black[1000] : colors.black[500]};
+  cursor: ${(props) => (props.authState.isLogin ? "pointer" : "default")};
+  position: relative;
+`;
+
+export const SaveBubble = styled.div<{ authState: IAuthState }>`
+  display: ${(props) => (props.authState.isLogin ? "none" : "flex")};
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: ${colors.blue[200]};
+  border-radius: 8px;
+  width: 359px;
+  height: 50px;
+  top: 60px;
+  right: 0;
+  font-weight: 500;
+  font-size: ${fontSize.deskTopFont.title};
+  line-height: 21px;
   color: ${colors.black[1000]};
-  cursor: pointer;
+
+  :after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 85%;
+    width: 0;
+    height: 0;
+    border: 16px solid transparent;
+    border-bottom-color: ${colors.blue[200]};
+    border-top: 0;
+    margin-left: -31px;
+    margin-top: -23px;
+  }
 `;
