@@ -84,6 +84,7 @@ export const AddQuestionButtonWrapper = styled.div`
   align-items: center;
 
   width: 59.583vw;
+  margin-bottom: 70px;
 
   ${setTabletStyle(css`
     width: 100%;
@@ -106,5 +107,33 @@ export const AddQuestionButton = styled.div`
   color: ${colors.blue[100]};
   margin-top: -8px;
   margin-bottom: 16px;
+  cursor: pointer;
+`;
+
+export const ScrollButtonWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20vw;
+
+  ${setTabletStyle(css`
+    right: 1.667vw;
+  `)}
+`;
+
+export const ScrollButton = styled.button<{ scrollTopDown: string }>`
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  background-color: ${colors.black[950]};
+  background-image: ${(props) =>
+    props.scrollTopDown === "top"
+      ? `url("/assets/header/icon_profile_up.png")`
+      : `url("/assets/header/icon_profile_down.png")`};
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.35);
+  border: transparent;
   cursor: pointer;
 `;
