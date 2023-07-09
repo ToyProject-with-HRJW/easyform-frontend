@@ -1,8 +1,19 @@
+import { useEffect } from "react";
 import * as S from "./Main.styles";
 import FormContainer from "components/commons/main/FormContainer";
+import { useRecoilState } from "recoil";
+import { loginState } from "store/loginState";
+import { useCookie } from "commons/utils/cookie";
 
 export default function Main() {
+  const [, setIsLogin] = useRecoilState(loginState);
   const mainData = "";
+
+  useEffect(() => {
+    if (useCookie.getCookie("access-token")) {
+      setIsLogin(true);
+    }
+  }, []);
 
   return mainData ? (
     <S.Wrapper>

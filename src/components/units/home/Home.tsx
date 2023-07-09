@@ -1,17 +1,17 @@
 import { useRouter } from "next/router";
 import * as S from "./Home.styles";
 import { useRecoilValue } from "recoil";
-import { AuthState } from "store/AuthState";
+import { loginState } from "store/loginState";
 import { useEffect } from "react";
 
 export default function Home() {
-  const authState = useRecoilValue(AuthState);
+  const isLogin = useRecoilValue(loginState);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (authState.isLogin) router.replace("/main");
-  }, [authState]);
+    if (isLogin) router.replace("/main");
+  }, [isLogin]);
 
   const onClickCloseModal = () => {
     router.push("/main");

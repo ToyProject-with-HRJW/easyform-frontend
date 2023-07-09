@@ -1,15 +1,17 @@
 import * as S from "components/commons/layout/header/Header.styles";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { AuthState } from "store/AuthState";
+import { loginState } from "store/loginState";
 
 export default function Header() {
-  const authState = useRecoilValue(AuthState);
+  const isLogin = useRecoilValue(loginState);
   const [isDisplayProfile, setIsDisplayProfile] = useState(false);
   const [isDisplaySearch, setIsDisplaySearch] = useState(false);
 
   const router = useRouter();
+
+  console.log(isLogin);
 
   const onClickLogo = () => {
     router.push("/");
@@ -43,7 +45,7 @@ export default function Header() {
           <S.LogoImage src="/assets/header/logo.png" />
         </S.LogoContainer>
 
-        {authState.isLogin ? (
+        {isLogin ? (
           <S.PCTBRightContainer>
             <S.AlertSearchIcon>
               <S.AlertSearchIconImage src="/assets/header/icon_alert.png" />
@@ -80,7 +82,7 @@ export default function Header() {
 
       <S.MBWrapper>
         {!isDisplaySearch ? (
-          authState.isLogin ? (
+          isLogin ? (
             <>
               <S.LogoContainer onClick={onClickLogo}>
                 <S.LogoImage src="/assets/header/logo.png" />

@@ -3,7 +3,7 @@ import * as S from "./MenuBar.styles";
 import Toggle from "components/commons/Toggle";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { AuthState } from "store/AuthState";
+import { AuthState } from "store/loginState";
 
 export default function MenuBar() {
   const authState = useRecoilValue(AuthState);

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { setTabletStyle } from "commons/styles/mediaQuery";
 import { fontSize } from "commons/styles/palette";
 import { colors } from "commons/styles/palette";
-import { IAuthState } from "store/AuthState";
+import { IAuthState } from "store/loginState";
 
 export const Wrapper = styled.div`
   display: flex;
