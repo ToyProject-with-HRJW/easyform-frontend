@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as S from "./FormContainer.styles";
 import FormModal from "./FormModal";
+import modalClose from "commons/utils/modalClose";
 
 export default function FormContainer() {
   const [isDisplayFormModal, setIsDisplayFormModal] = useState(false);
+
+  const outSide = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    modalClose(isDisplayFormModal, setIsDisplayFormModal, outSide);
+  });
 
   const onClickSeeMoreRecent = () => {
     setIsDisplayFormModal(!isDisplayFormModal);
@@ -20,7 +27,7 @@ export default function FormContainer() {
           <S.FormTitle>Account Approval Research</S.FormTitle>
           <S.FormEditDate>edited 3days ago</S.FormEditDate>
         </S.FormInfoContainer>
-        <S.ButtonWrapper>
+        <S.ButtonWrapper ref={outSide}>
           <S.FormSeeMoreButton onClick={onClickSeeMoreRecent} />
           <FormModal
             isDisplayFormModal={isDisplayFormModal}

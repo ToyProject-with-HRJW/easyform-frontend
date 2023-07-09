@@ -1,17 +1,31 @@
+import { useCookie } from "commons/utils/cookie";
+import modalClose from "commons/utils/modalClose";
 import * as S from "components/commons/layout/header/Header.styles";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useEffect, useRef, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { loginState } from "store/loginState";
 
 export default function Header() {
-  const isLogin = useRecoilValue(loginState);
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [isDisplayProfile, setIsDisplayProfile] = useState(false);
   const [isDisplaySearch, setIsDisplaySearch] = useState(false);
 
+  const outSide = useRef<HTMLDivElement>(null);
+
   const router = useRouter();
 
-  console.log(isLogin);
+  useEffect(() => {
+    modalClose(isDisplayProfile, setIsDisplayProfile, outSide);
+  }, [isDisplayProfile]);
+
+  useEffect(() => {
+    if (useCookie.getCookie("access-token")) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [isLogin]);
 
   const onClickLogo = () => {
     router.push("/");
@@ -38,8 +52,15 @@ export default function Header() {
     setIsDisplaySearch(false);
   };
 
+  const onClickLogOut = () => {
+    useCookie.removeCookie("access-token");
+    setIsDisplayProfile(false);
+    setIsLogin(false);
+    router.replace("/");
+  };
+
   return (
-    <>
+    <div>
       <S.PCTBWrapper>
         <S.LogoContainer onClick={onClickLogo}>
           <S.LogoImage src="/assets/header/logo.png" />
@@ -50,7 +71,7 @@ export default function Header() {
             <S.AlertSearchIcon>
               <S.AlertSearchIconImage src="/assets/header/icon_alert.png" />
             </S.AlertSearchIcon>
-            <S.ProfileContainer>
+            <S.ProfileContainer ref={outSide}>
               <S.ProfileImage />
               <S.ProfileButtonIcon
                 onClick={onClickProfileButton}
@@ -71,7 +92,7 @@ export default function Header() {
             <S.EmailInfo>abcdefg@gmail.com</S.EmailInfo>
           </S.EmailWrapper>
           <S.BorderLine />
-          <S.LogoutWrapper>
+          <S.LogoutWrapper onClick={onClickLogOut}>
             <S.ModalIcon>
               <S.ModalIconImage src="/assets/header/icon_modal_logout.png" />
             </S.ModalIcon>
@@ -118,6 +139,6 @@ export default function Header() {
           </S.MBSearchContainer>
         )}
       </S.MBWrapper>
-    </>
+    </div>
   );
 }

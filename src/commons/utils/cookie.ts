@@ -6,4 +6,8 @@ const getCookie = (name: string) => {
   return cookies.get(name);
 };
 
-export const useCookie = { getCookie };
+const removeCookie = (name: string) => {
+  return cookies.remove(name);
+};
+
+export const useCookie = { getCookie, removeCookie };
