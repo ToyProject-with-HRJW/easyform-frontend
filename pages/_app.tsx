@@ -4,7 +4,6 @@ import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import Layout from "../src/components/commons/layout";
 import "../public/static/fonts/style.css";
 
@@ -22,16 +21,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           type="text/javascript"
         ></script>
       </Head>
-      <GoogleOAuthProvider clientId={clientId}>
-        <QueryClientProvider client={queryClient}>
-          <RecoilRoot>
-            <Global styles={globalStyles} />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </RecoilRoot>
-        </QueryClientProvider>
-      </GoogleOAuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <Global styles={globalStyles} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </RecoilRoot>
+      </QueryClientProvider>
     </>
   );
 }

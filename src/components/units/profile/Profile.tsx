@@ -1,10 +1,24 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import * as S from "./Profile.styles";
+import { useCookie } from "commons/utils/cookie";
+import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { loginState } from "store/loginState";
+import modalClose from "commons/utils/modalClose";
 
 export default function Profile() {
   const [isEditNickName, setIsEditNickName] = useState(false);
   const [language, setLanguage] = useState("korean");
   const [isModalDisplay, setIsModalDisplay] = useState(false);
+  const [, setIsLogin] = useRecoilState(loginState);
+
+  const outSide = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    modalClose(isModalDisplay, setIsModalDisplay, outSide);
+  });
 
   const onClickEditNickName = () => {
     setIsEditNickName(!isEditNickName);
@@ -16,6 +30,12 @@ export default function Profile() {
 
   const onClickWithdrawButton = () => {
     setIsModalDisplay(!isModalDisplay);
+  };
+
+  const onClickLogOut = () => {
+    useCookie.removeCookie("access-token");
+    setIsLogin(false);
+    router.replace("/");
   };
 
   return (
@@ -72,7 +92,7 @@ export default function Profile() {
       </S.ContentsContainer>
 
       <S.BottomContainer>
-        <S.withdrawButton onClick={onClickWithdrawButton}>
+        <S.withdrawButton onClick={onClickWithdrawButton} ref={outSide}>
           회원탈퇴
           <S.withdrawModal isModalDisplay={isModalDisplay}>
             <S.ModalTitle>회원탈퇴</S.ModalTitle>
@@ -87,7 +107,7 @@ export default function Profile() {
             </S.ModalButtonContainer>
           </S.withdrawModal>
         </S.withdrawButton>
-        <S.logOutButton>로그아웃</S.logOutButton>
+        <S.logOutButton onClick={onClickLogOut}>로그아웃</S.logOutButton>
       </S.BottomContainer>
     </S.Wrapper>
   );
