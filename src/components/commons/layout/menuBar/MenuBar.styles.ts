@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { setTabletStyle } from "commons/styles/mediaQuery";
 import { fontSize } from "commons/styles/palette";
 import { colors } from "commons/styles/palette";
-import { IAuthState } from "store/loginState";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -90,19 +89,18 @@ export const TextButton = styled.button`
   cursor: pointer;
 `;
 
-export const ShareButton = styled.button<{ authState: IAuthState }>`
+export const ShareButton = styled.button<{ isLogin: boolean }>`
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 24px;
-  color: ${(props) =>
-    props.authState.isLogin ? colors.black[300] : colors.black[500]};
+  color: ${(props) => (props.isLogin ? colors.black[300] : colors.black[500])};
   background-color: transparent;
   padding: 0;
   border: none;
-  cursor: ${(props) => (props.authState.isLogin ? "pointer" : "default")};
+  cursor: ${(props) => (props.isLogin ? "pointer" : "default")};
 `;
 
-export const SaveButton = styled.div<{ authState: IAuthState }>`
+export const SaveButton = styled.div<{ isLogin: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,18 +109,17 @@ export const SaveButton = styled.div<{ authState: IAuthState }>`
   height: 40px;
   border-radius: 4px;
   background-color: ${(props) =>
-    props.authState.isLogin ? colors.blue[100] : colors.black[700]};
+    props.isLogin ? colors.blue[100] : colors.black[700]};
   font-weight: 500;
   font-size: 1.6rem;
   line-height: 24px;
-  color: ${(props) =>
-    props.authState.isLogin ? colors.black[1000] : colors.black[500]};
-  cursor: ${(props) => (props.authState.isLogin ? "pointer" : "default")};
+  color: ${(props) => (props.isLogin ? colors.black[1000] : colors.black[500])};
+  cursor: ${(props) => (props.isLogin ? "pointer" : "default")};
   position: relative;
 `;
 
-export const SaveBubble = styled.div<{ authState: IAuthState }>`
-  display: ${(props) => (props.authState.isLogin ? "none" : "flex")};
+export const SaveBubble = styled.div<{ isLogin: boolean }>`
+  display: ${(props) => (props.isLogin ? "none" : "flex")};
   justify-content: center;
   align-items: center;
   position: absolute;

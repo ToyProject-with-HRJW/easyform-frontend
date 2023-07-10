@@ -3,10 +3,10 @@ import * as S from "./MenuBar.styles";
 import Toggle from "components/commons/Toggle";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { AuthState } from "store/loginState";
+import { loginState } from "store/loginState";
 
 export default function MenuBar() {
-  const authState = useRecoilValue(AuthState);
+  const isLogin = useRecoilValue(loginState);
   const [isOn, setIsOn] = useState(true);
 
   const router = useRouter();
@@ -52,11 +52,11 @@ export default function MenuBar() {
         <S.MiddleButtonContainer>
           <S.TextButton>미리보기</S.TextButton>
           <S.TextButton>초기화</S.TextButton>
-          <S.ShareButton authState={authState}>공유</S.ShareButton>
+          <S.ShareButton isLogin={isLogin}>공유</S.ShareButton>
         </S.MiddleButtonContainer>
-        <S.SaveButton authState={authState}>
+        <S.SaveButton isLogin={isLogin}>
           저장
-          <S.SaveBubble authState={authState}>
+          <S.SaveBubble isLogin={isLogin}>
             로그인 이후 서비스를 완전히 이용할 수 있어요!
           </S.SaveBubble>
         </S.SaveButton>
